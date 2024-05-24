@@ -2,6 +2,10 @@
 const express = require("express");
 const app = express();
 const db = require("./demo/src/database/db");
+const userRouter=require("./demo/src/router/userRouter")
+app.use("/user",userRouter)
+
+
 db.on("open", () => {
   app.listen(3000, () => {
     console.log("Port is running in 3000");
