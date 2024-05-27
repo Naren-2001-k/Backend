@@ -20,3 +20,5 @@ const registerSchema=new mongoose.Schema({
         default:true
     }
 })
+const registerModel = mongoose.model("register",registerSchema);
+module.exports = registerModel;

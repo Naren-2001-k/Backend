@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 const db = require("./demo/src/database/db");
 const userRouter=require("./demo/src/router/userRouter")
+const bodyParser=require("body-parser")
+app.use(bodyParser.json())
 app.use("/user",userRouter)
 
 
