@@ -2,13 +2,12 @@
 const express = require("express");
 const app = express();
 const db = require("./demo/src/database/db");
-const userRouter=require("./demo/src/router/userRouter")
-const productRoute=require("./demo/src/router/productRouter")
-const bodyParser=require("body-parser")
-app.use(bodyParser.json())
-app.use("/user",userRouter)
+const userRouter = require("./demo/src/router/userRouter");
+const productRoute = require("./demo/src/router/productRouter");
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+app.use("/user", userRouter);
 app.use("/product", productRoute);
-
 
 db.on("open", () => {
   app.listen(3000, () => {
