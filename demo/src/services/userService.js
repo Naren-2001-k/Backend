@@ -31,9 +31,20 @@ const getSpecificUser = async (id) => {
    ]);
    return userDetails;
 };
+const deleteUser = async (id) => {
+  const deleteUserDetails = await usermodel.findById({ _id: id });
+  if (!deleteUserDetails) {
+    console.log("user not found");
+  } else {
+    const deletedata = await usermodel.findByIdAndDelete({ _id: id });
+    console.log(deletedata);
+  }
+  return deleteUserDetails;
+};
  
 module.exports={
     createUserDetails,
     getUsers,
-    getSpecificUser
+    getSpecificUser,
+    deleteUser
 };
