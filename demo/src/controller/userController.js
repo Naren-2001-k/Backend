@@ -21,29 +21,27 @@ const login = async (req, res) => {
   const { email, password } = req.body;
   console.log(email, password);
   // try {
-    const user = await usermodel.findOne({ email, password });
+  const user = await usermodel.findOne({ email, password });
   //   console.log(user);
-    if (user) {
-      res.status(200).send({ message: "Authentication Successfull",user });
-    } else {
-      res.status(401).send({ message: "Authentication failed" });
-    }
+  if (user) {
+    res.status(200).send({ message: "Authentication Successfull", user });
+  } else {
+    res.status(401).send({ message: "Authentication failed" });
+  }
   // } catch (error) {
   //   res.status(500).send({ message: "Server error", error });
   // }
 };
-const activeUser=async(req,res)=>{
-  const userStatus= await usermodel.aggregate([
-    {
-      
-    }
-  ])
-}
-
+const activeUser = async (req, res) => {
+  console.log(req.body, "contoller data");
+  const User = await userService.inactiveUser(req.body);
+  res.send(User);
+};
 module.exports = {
   createUserDetails,
   getUserAll,
   getSpecificUser,
   deleteUser,
   login,
+  activeUser,
 };

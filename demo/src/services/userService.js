@@ -12,25 +12,28 @@ const getSpecificUser = async (id) => {
   return userDetails;
   // console.log(id);
 };
-// const userDetails = await usermodel.aggregate([
-// {
-//   $match: {
-//     _id: id,
-//   },
-// },
-// {
-// $match: {
-// $and: [{ _id: { $eq: id } }, { name: { $eq: "John Doe" } }],
-// },
-// },
-// {
-//   $match: {
-//     $or: [{ _id: { $eq: id } }, { name: { $eq: "Alice" } }],
-//   },
-// },
-// ]);
-// return userDetails;
-// };
+const inactiveUser = async (body) => {
+  // console.log("Inactive User", body);
+  const userDetails = await usermodel.aggregate([
+    {
+      $match: {
+        active: true,
+        name: "Sophia Davis",
+      },
+    },
+    // {
+    //   $match: {
+    //     $and: [{ active: { $eq: "true" } }, { name: { $eq: "Sophia Davis" } }],
+    //   },
+    // },
+    // {
+    //   $match: {
+    //     $or: [{ _id: { $eq: id } }, { name: { $eq: "Alice" } }],
+    //   },
+    // },
+  ]);
+  return userDetails;
+};
 const deleteUser = async (id) => {
   const deleteUserDetails = await usermodel.findById({ _id: id });
   if (!deleteUserDetails) {
@@ -47,4 +50,5 @@ module.exports = {
   getUsers,
   getSpecificUser,
   deleteUser,
+  inactiveUser,
 };

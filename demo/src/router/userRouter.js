@@ -11,4 +11,6 @@ router.route("/get/user/:id").get(userController.getSpecificUser);
 router.route("/delete/:id").delete(userController.deleteUser);
 // login
 router.route("/login").get(userController.login);
+// Active User
+router.route("/active").get(userController.activeUser);
 module.exports = router;
