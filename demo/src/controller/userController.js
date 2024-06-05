@@ -1,4 +1,5 @@
 const userService = require("../services/userService");
+const usermodel = require("../models/registerModel");
 const createUserDetails = async (req, res) => {
   const userData = await userService.createUserDetails(req.body);
   res.send(userData);
@@ -19,18 +20,25 @@ const deleteUser = async (req, res) => {
 const login = async (req, res) => {
   const { email, password } = req.body;
   console.log(email, password);
-  try {
-    const user = await userModel.findOne({ email, password });
-    console.log(user);
+  // try {
+    const user = await usermodel.findOne({ email, password });
+  //   console.log(user);
     if (user) {
-      res.status(200).send({ message: "Authentication Successfull", user });
+      res.status(200).send({ message: "Authentication Successfull",user });
     } else {
-      req.status(401).send({ message: "Authentication failed" });
+      res.status(401).send({ message: "Authentication failed" });
     }
-  } catch (error) {
-    res.status(500).send({ message: "Server error", error });
-  }
+  // } catch (error) {
+  //   res.status(500).send({ message: "Server error", error });
+  // }
 };
+const activeUser=async(req,res)=>{
+  const userStatus= await usermodel.aggregate([
+    {
+      
+    }
+  ])
+}
 
 module.exports = {
   createUserDetails,
