@@ -1,0 +1,23 @@
+.table {
+  display: flex;
+  margin: auto;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.table table {
+  width: 800px;
+  height: 700px;
+}
+.table table th {
+  padding: 10px;
+  background-color: #04aa6d;
+  color: white;
+  font-family: "Times New Roman", Times, serif;
+}
+.table table td {
+  padding: 10px;
+  background-color: rgb(173, 245, 191);
+  font-family: "Times New Roman", Times, serif;
+  font-size: 17px;
+}/*# sourceMappingURL=Table.css.map */

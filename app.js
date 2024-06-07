@@ -5,6 +5,8 @@ const db = require("./demo/src/database/db");
 const userRouter = require("./demo/src/router/userRouter");
 const productRoute = require("./demo/src/router/productRouter");
 const bodyParser = require("body-parser");
+const cors = require("cors");
+app.use(cors());
 app.use(bodyParser.json());
 app.use("/user", userRouter);
 app.use("/product", productRoute);
