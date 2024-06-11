@@ -13,12 +13,12 @@ function Table() {
     axios
       .get(url)
       .then((response) => {
-        setData(response.data); // Set the fetched data to state
-        setLoading(false); // Set loading state to false
+        setData(response.data); 
+        setLoading(false); 
       })
       .catch((error) => {
-        setError(error.message); // Set error message
-        setLoading(false); // Set loading state to false
+        setError(error.message); 
+        setLoading(false); 
       });
   }, []);
 

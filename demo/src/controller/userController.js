@@ -37,6 +37,11 @@ const activeUser = async (req, res) => {
   const User = await userService.inactiveUser(req.body);
   res.send(User);
 };
+
+const updateUser=async(req,res)=>{
+  const updateData=await userService.userData(req.params.id,req.body)
+  res.send(updateData);
+}
 module.exports = {
   createUserDetails,
   getUserAll,
@@ -44,4 +49,5 @@ module.exports = {
   deleteUser,
   login,
   activeUser,
+  updateUser
 };

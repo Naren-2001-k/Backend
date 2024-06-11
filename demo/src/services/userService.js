@@ -44,6 +44,15 @@ const deleteUser = async (id) => {
   }
   return deleteUserDetails;
 };
+const userData=async(id,body)=>{
+  const dataUpdate=await usermodel.findById({_id:id})
+  console.log(dataUpdate);
+  if(!dataUpdate){
+    console.log("User Not Found")
+  }
+  const data=await usermodel.findByIdAndUpdate(id,body,{new:true})
+  return data;
+}
 
 module.exports = {
   createUserDetails,
@@ -51,4 +60,5 @@ module.exports = {
   getSpecificUser,
   deleteUser,
   inactiveUser,
+  userData
 };

@@ -13,4 +13,6 @@ router.route("/delete/:id").delete(userController.deleteUser);
 router.route("/login").get(userController.login);
 // Active User
 router.route("/active").get(userController.activeUser);
+// Update User
+router.route("/update/user/:id").put(userController.updateUser);
 module.exports = router;
