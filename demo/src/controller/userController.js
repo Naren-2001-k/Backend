@@ -38,10 +38,16 @@ const activeUser = async (req, res) => {
   res.send(User);
 };
 
-const updateUser=async(req,res)=>{
-  const updateData=await userService.userData(req.params.id,req.body)
+const updateUser = async (req, res) => {
+  const updateData = await userService.userData(req.params.id, req.body);
   res.send(updateData);
-}
+};
+
+// Wishlist
+const userWishlist = async (req, res) => {
+  const getWishlist = await userService.wishlistData(req.params.id);
+  res.send(getWishlist);
+};
 module.exports = {
   createUserDetails,
   getUserAll,
@@ -49,5 +55,6 @@ module.exports = {
   deleteUser,
   login,
   activeUser,
-  updateUser
+  updateUser,
+  userWishlist,
 };

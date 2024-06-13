@@ -13,12 +13,12 @@ function Table() {
     axios
       .get(url)
       .then((response) => {
-        setData(response.data); 
-        setLoading(false); 
+        setData(response.data);
+        setLoading(false);
       })
       .catch((error) => {
-        setError(error.message); 
-        setLoading(false); 
+        setError(error.message);
+        setLoading(false);
       });
   }, []);
 
@@ -27,6 +27,10 @@ function Table() {
 
   return (
     <div className="container">
+      <div className="edit">
+        <input type="text" />
+        <button>Delete</button>
+      </div>
       <div className="table">
         {loading ? (
           <p>Loading...</p>

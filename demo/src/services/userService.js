@@ -44,15 +44,56 @@ const deleteUser = async (id) => {
   }
   return deleteUserDetails;
 };
-const userData=async(id,body)=>{
-  const dataUpdate=await usermodel.findById({_id:id})
+const userData = async (id, body) => {
+  const dataUpdate = await usermodel.findById({ _id: id });
   console.log(dataUpdate);
-  if(!dataUpdate){
-    console.log("User Not Found")
+  if (!dataUpdate) {
+    console.log("User Not Found");
   }
-  const data=await usermodel.findByIdAndUpdate(id,body,{new:true})
+  const data = await usermodel.findByIdAndUpdate(id, body, { new: true });
   return data;
-}
+};
+
+// wishlist
+const wishlistData = async (id) => {
+  const productWishlist = await usermodel.aggregate([
+    {
+      $match: {
+        _id: id,
+      },
+    },
+    {
+      $lookup: {
+        from: "wishlists",
+        localField: "_id",
+        foreignField: "userId",
+        as: "wishlistData",
+      },
+    },
+    {
+      $lookup: {
+        from: "products",
+        localField: "wishlistData.productId",
+        foreignField: "_id",
+        as: "productData",
+      },
+    },
+    {
+      $project: {
+        // products: 1,
+        name: 1,
+        _id: 0,
+        mobile: 1,
+        email: 1,
+        // productData: 1,
+        product_name: "$productData.productName",
+        product_price: "$productData.price",
+        qty: "$productData.qty",
+      },
+    },
+  ]);
+  return productWishlist;
+};
 
 module.exports = {
   createUserDetails,
@@ -60,5 +101,6 @@ module.exports = {
   getSpecificUser,
   deleteUser,
   inactiveUser,
-  userData
+  userData,
+  wishlistData,
 };

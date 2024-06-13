@@ -15,4 +15,6 @@ router.route("/login").get(userController.login);
 router.route("/active").get(userController.activeUser);
 // Update User
 router.route("/update/user/:id").put(userController.updateUser);
+// Wishlist Data and bind the table
+router.route("/get/wishlist/product/:id").get(userController.userWishlist);
 module.exports = router;
