@@ -4,12 +4,14 @@ const app = express();
 const db = require("./demo/src/database/db");
 const userRouter = require("./demo/src/router/userRouter");
 const productRoute = require("./demo/src/router/productRouter");
+const orderRouter = require("./demo/src/router/orderRouter");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 app.use(cors());
 app.use(bodyParser.json());
 app.use("/user", userRouter);
 app.use("/product", productRoute);
+app.use("/order", orderRouter);
 
 db.on("open", () => {
   app.listen(3000, () => {
