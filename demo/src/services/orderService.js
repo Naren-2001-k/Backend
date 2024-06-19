@@ -23,12 +23,29 @@ const getOrderDetails = async (id) => {
       },
     },
     {
+      $lookup: {
+        from: "products",
+        localField: "orderdata.productId",
+        foreignField: "_id",
+        as: "productdata",
+      },
+    },
+    {
       $project: {
-        _id: 0,
         name: 1,
-        id: 1,
+        age: 1,
+        mobile: 1,
         email: 1,
-        orderdata: 1,
+        orderdata: {
+          _id: 1,
+        },
+        productdata: {
+          _id: 1,
+          productName: 1,
+          price: 1,
+          qty: 1,
+          Img: 1,
+        },
       },
     },
   ]);
