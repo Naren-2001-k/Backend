@@ -48,6 +48,12 @@ const userWishlist = async (req, res) => {
   const getWishlist = await userService.wishlistData(req.params.id);
   res.send(getWishlist);
 };
+
+// // empty data deletion
+// const deleteEmptyData = async (req, res) => {
+//   const removeEmpty = await userService.deleteEmptyData(req.body);
+//   res.send(removeEmpty);
+// };
 module.exports = {
   createUserDetails,
   getUserAll,
@@ -57,4 +63,5 @@ module.exports = {
   activeUser,
   updateUser,
   userWishlist,
+  // deleteEmptyData,
 };

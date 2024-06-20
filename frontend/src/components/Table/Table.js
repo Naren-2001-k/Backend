@@ -7,70 +7,130 @@ function Table() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [userName, setName] = useState("");
+  const [userAge, setAge] = useState("");
+  const [userEmail, setEmail] = useState("");
+  const [userMobile, setMobile] = useState("");
 
   useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = async () => {
     const url = `http://localhost:3000/user/get/all/user`;
 
-    axios
-      .get(url)
-      .then((response) => {
-        setData(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error.message);
-        setLoading(false);
-      });
-  }, []);
-  // const handleDelete = async () => {
-  //   try {
-  //     await axios.delete(`http://localhost:3000/user/delete/${userName}`);
-  //     setData(data.filter((data) => data.name !== userName));
-  //   } catch (error) {
-  //     console.error("Error deleting user:", error);
-  //   }
-  //   return alert("Data deleted successfully");
-  // };
+    try {
+      const response = await axios.get(url);
+      setData(response.data);
+      setLoading(false);
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
+
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
+
+  const handleAgeChange = (e) => {
+    setAge(e.target.value);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleMobileChange = (e) => {
+    setMobile(e.target.value);
+  };
+
+  const handleAdd = async () => {
+    if (!userName || !userAge || !userEmail || !userMobile) {
+      alert("Please fill out all fields.");
+      return;
+    }
+    const newUser = {
+      name: userName,
+      age: userAge,
+      email: userEmail,
+      mobile: userMobile,
+    };
+
+    try {
+      const response = await axios.post(
+        `http://localhost:3000/user/register`,
+        newUser
+      );
+
+      setData([...data, response.data]); // Update local state with the new user
+      setName(""); // Reset input fields after successful addition
+      setAge("");
+      setEmail("");
+      setMobile("");
+
+      alert("User added successfully");
+    } catch (error) {
+      console.error("Error adding user:", error.message);
+      alert("Error adding user: " + error.message);
+    }
+  };
+
   const handleDelete = async () => {
     try {
-      // Find the user by name
       const userToDelete = data.find((user) => user.name === userName);
       if (!userToDelete) {
         throw new Error(`User with name "${userName}" not found.`);
       }
 
-      // Send a DELETE request to the backend to delete the user
       await axios.delete(
         `http://localhost:3000/user/delete/${userToDelete._id}`
       );
 
-      // Remove the user from the local state
       setData(data.filter((user) => user.name !== userName));
 
-      // Reset the input field
       setName("");
+      setAge("");
+      setEmail("");
+      setMobile("");
 
-      // Show a success message
-      alert("Data deleted successfully");
+      alert("User deleted successfully");
     } catch (error) {
       console.error("Error deleting user:", error.message);
-      // Show an error message
       alert("Error deleting user: " + error.message);
     }
   };
 
-  // Check data for debugging
-  console.log("Data:", data);
-
   return (
     <div className="container">
       <div className="edit">
-        <input type="text" onChange={handleNameChange} />
-        <button className="add">Add</button>
-        <button className="delete" onClick={() => handleDelete()}>
+        <input
+          type="text"
+          placeholder="Name"
+          value={userName}
+          onChange={handleNameChange}
+        />
+        <input
+          type="text"
+          placeholder="Age"
+          value={userAge}
+          onChange={handleAgeChange}
+        />
+        <input
+          type="text"
+          placeholder="Email"
+          value={userEmail}
+          onChange={handleEmailChange}
+        />
+        <input
+          type="text"
+          placeholder="Mobile"
+          value={userMobile}
+          onChange={handleMobileChange}
+        />
+        <button className="add" onClick={handleAdd}>
+          Add
+        </button>
+        <button className="delete" onClick={handleDelete}>
           Delete
         </button>
       </div>
@@ -83,7 +143,6 @@ function Table() {
           <table>
             <thead>
               <tr>
-                {/* <th>UserID</th> */}
                 <th>NAME</th>
                 <th>AGE</th>
                 <th>EMAIL</th>
@@ -93,7 +152,6 @@ function Table() {
             <tbody>
               {data.map((user) => (
                 <tr key={user._id}>
-                  {/* <td>{user._id}</td> */}
                   <td>{user.name}</td>
                   <td>{user.age}</td>
                   <td>{user.email}</td>

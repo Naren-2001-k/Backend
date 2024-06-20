@@ -95,6 +95,24 @@ const wishlistData = async (id) => {
   return productWishlist;
 };
 
+// const deleteEmptyData = async (body) => {
+//   const clearData = await usermodel.deleteMany(
+//     {
+//       name: { $exists: true, $eq: "" },
+//     },
+//     {
+//       age: { $exists: true, $eq: "" },
+//     },
+//     {
+//       email: { $exists: true, $eq: "" },
+//     },
+//     {
+//       mobile: { $exists: true, $eq: "" },
+//     }
+//   );
+//   return clearData;
+// };
+
 module.exports = {
   createUserDetails,
   getUsers,
@@ -103,4 +121,5 @@ module.exports = {
   inactiveUser,
   userData,
   wishlistData,
+  // deleteEmptyData,
 };
