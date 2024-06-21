@@ -94,24 +94,26 @@ const wishlistData = async (id) => {
   ]);
   return productWishlist;
 };
+const getAllUser = async (page) => {
+  const allUser = await usermodel.aggregate([
+    {
+      $skip: page * 21,
+    },
+    {
+      $limit: 21,
+    },
+  ]);
+  return allUser;
+};
 
-// const deleteEmptyData = async (body) => {
-//   const clearData = await usermodel.deleteMany(
-//     {
-//       name: { $exists: true, $eq: "" },
-//     },
-//     {
-//       age: { $exists: true, $eq: "" },
-//     },
-//     {
-//       email: { $exists: true, $eq: "" },
-//     },
-//     {
-//       mobile: { $exists: true, $eq: "" },
-//     }
-//   );
-//   return clearData;
-// };
+const sortData = async (body) => {
+  const sort = await usermodel.aggregate([
+    {
+      $sort: { date: -1 },
+    },
+  ]);
+  return sort;
+};
 
 module.exports = {
   createUserDetails,
@@ -121,5 +123,7 @@ module.exports = {
   inactiveUser,
   userData,
   wishlistData,
+  getAllUser,
+  sortData,
   // deleteEmptyData,
 };

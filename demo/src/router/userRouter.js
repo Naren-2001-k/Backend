@@ -18,6 +18,10 @@ router.route("/active").get(userController.activeUser);
 router.route("/update/user/:id").put(userController.updateUser);
 // Wishlist Data and bind the table
 router.route("/get/wishlist/product/:id").get(userController.userWishlist);
+// get all user with pagination
+router.route("/get/all/user/:page").get(userController.getAllUser);
+// sorting
+router.route("/sort").get(userController.sortData);
 // delete empty data
 router.delete("/delete-empty-users", async (req, res) => {
   try {

@@ -7,5 +7,7 @@ router.route("/get/all/product").get(productController.getProductAll);
 router.route("/wishlist").post(wishlistController.addWishlist);
 // get all product using pagination
 router.route("/get/all/product/:page").get(productController.getAllProduct);
+// sorting
+router.route("/sort").get(productController.sortData);
 
 module.exports = router;

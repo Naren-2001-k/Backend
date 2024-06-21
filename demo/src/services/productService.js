@@ -24,9 +24,17 @@ const getAllProduct = async (page) => {
   ]);
   return allProduct;
 };
+const sortData = async (body) => {
+  const sort = await productModel.aggregate([
+    { $match: { price: { $gt: 5 } } }, // roducts where price > 5
+    { $sort: { price: 1 } },
+  ]);
+  return sort;
+};
 
 module.exports = {
   createProduct,
   getProduct,
   getAllProduct,
+  sortData,
 };
