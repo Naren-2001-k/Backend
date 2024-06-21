@@ -49,6 +49,19 @@ const userWishlist = async (req, res) => {
   res.send(getWishlist);
 };
 
+const createUser=async(body)=>{
+  const createDate=new Date();
+  const userData={
+    date:createDate
+  }
+  const user=await usermodel.create({...userData,...body})
+  return user
+};
+
+const sortData=async(body)=>{
+  const sort=await usermodel.aggregate([])
+}
+
 // // empty data deletion
 // const deleteEmptyData = async (req, res) => {
 //   const removeEmpty = await userService.deleteEmptyData(req.body);
@@ -63,5 +76,7 @@ module.exports = {
   activeUser,
   updateUser,
   userWishlist,
+  createUser,
+  sortData
   // deleteEmptyData,
 };
