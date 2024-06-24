@@ -106,7 +106,7 @@ const getAllUser = async (page) => {
   return allUser;
 };
 
-const sortData = async (body) => {
+const sortData = async () => {
   const sort = await usermodel.aggregate([
     {
       $sort: { date: -1 },

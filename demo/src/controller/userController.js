@@ -59,7 +59,7 @@ const createUser = async (body) => {
 };
 
 const sortData = async (req, res) => {
-  const sort = await userService.sortData(req.body);
+  const sort = await userService.sortData();
   res.send(sort);
 };
 
