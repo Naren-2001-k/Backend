@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userController = require("../controller/userController");
+const productController=require("../controller/productController")
 const usermodel = require("../models/registerModel");
 // create data
 router.route("/register").post(userController.createUserDetails);
@@ -22,6 +23,8 @@ router.route("/get/wishlist/product/:id").get(userController.userWishlist);
 router.route("/get/all/user/:page").get(userController.getAllUser);
 // sorting
 router.route("/sort").get(userController.sortData);
+// grouping
+router.route("/grouping").get(productController.groupingData);
 // delete empty data
 router.delete("/delete-empty-users", async (req, res) => {
   try {

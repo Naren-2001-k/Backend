@@ -16,9 +16,14 @@ const sortData = async (req, res) => {
   const sort = await productService.sortData(req.body);
   res.send(sort);
 };
+ const groupingData=async()=>{
+  const grouping=await productService.groupingData();
+  res.send(grouping);
+ }
 module.exports = {
   createProductData,
   getProductAll,
   getAllProduct,
   sortData,
+  groupingData
 };
