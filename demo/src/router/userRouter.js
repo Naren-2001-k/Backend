@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userController = require("../controller/userController");
-const productController=require("../controller/productController")
+const productController = require("../controller/productController");
 const usermodel = require("../models/registerModel");
 // create data
 router.route("/register").post(userController.createUserDetails);

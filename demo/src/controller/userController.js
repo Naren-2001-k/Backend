@@ -79,5 +79,4 @@ module.exports = {
   createUser,
   sortData,
   getAllUser,
-  // deleteEmptyData,
 };

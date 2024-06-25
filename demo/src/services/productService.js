@@ -31,21 +31,24 @@ const sortData = async (body) => {
   ]);
   return sort;
 };
-const groupingData=async()=>{
-  const grouping=await productModel.aggregate([
-{
-  $group:{
-    
-  }
-}
-  ])
-  return grouping
-}
+const groupingData = async () => {
+  const grouping = await productModel.aggregate([
+    {
+      $match: { price: { $gt: 5 } },
+    },
+    {
+      $group: {
+        _id: "$productName",
+      },
+    },
+  ]);
+  return grouping;
+};
 
 module.exports = {
   createProduct,
   getProduct,
   getAllProduct,
   sortData,
-  groupingData
+  groupingData,
 };
