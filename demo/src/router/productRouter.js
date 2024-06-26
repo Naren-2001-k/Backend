@@ -10,6 +10,8 @@ router.route("/get/all/product/:page").get(productController.getAllProduct);
 // sorting
 router.route("/sort").get(productController.sortData);
 // update many
-router.route("/update/product").put(productController)
+router.route("/update/product/all").put(productController.updateManyData);
+// update many
+router.route("/update/product/qty").put(productController.updateQtyData);
 
 module.exports = router;

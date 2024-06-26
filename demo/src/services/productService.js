@@ -44,18 +44,23 @@ const groupingData = async () => {
   ]);
   return grouping;
 };
-const updateManyData=async()=>{
-const result = await productModel.updateMany(
-  { price: { $lt: 20 } }, // Condition: price less than 20 rupees
-  { $set: { minimumqty: 10 } } // Update: set minimumqty to 10
-);
-return result;
-}
+const updateManyData = async () => {
+  const result = await productModel.updateMany(
+    { price: { $lt: 20 } }, // Condition: price less than 20 rupees
+    { $set: { minimumQty: 10 } } // Update: set minimumqty to 10
+  );
+  return result;
+};
+const updateQtyData = async (update) => {
+  const result = await productModel.updateMany({ $set: update });
+  return result;
+};
 module.exports = {
   createProduct,
   getProduct,
   getAllProduct,
   sortData,
   groupingData,
-  updateManyData
+  updateManyData,
+  updateQtyData,
 };
