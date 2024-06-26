@@ -9,5 +9,7 @@ router.route("/wishlist").post(wishlistController.addWishlist);
 router.route("/get/all/product/:page").get(productController.getAllProduct);
 // sorting
 router.route("/sort").get(productController.sortData);
+// update many
+router.route("/update/product").put(productController)
 
 module.exports = router;

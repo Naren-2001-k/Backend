@@ -20,10 +20,16 @@ const groupingData = async (req, res) => {
   const grouping = await productService.groupingData();
   res.send(grouping);
 };
+const updateManyData=async(req,res)=>{
+const {price,minimumqty}=req.body
+const result=await productService.updateManyData(price,minimumqty)
+res.send(result)
+}
 module.exports = {
   createProductData,
   getProductAll,
   getAllProduct,
   sortData,
   groupingData,
+  updateManyData
 };
