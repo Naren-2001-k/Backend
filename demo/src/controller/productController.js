@@ -21,14 +21,18 @@ const groupingData = async (req, res) => {
   res.send(grouping);
 };
 const updateManyData = async (req, res) => {
-  const { price, qty } = req.body;
-  const result = await productService.updateManyData(price, qty);
+  const { price, minimumQty } = req.body;
+  const result = await productService.updateManyData(price, minimumQty);
   res.send(result);
 };
 const updateQtyData = async (req, res) => {
   const { update } = req.body;
   const result = await productService.updateQtyData(update);
   res.send(result);
+};
+const deleteField = async (req, res) => {
+  const deleted = await productService.deleteField();
+  res.send(deleted);
 };
 module.exports = {
   createProductData,
@@ -38,4 +42,5 @@ module.exports = {
   groupingData,
   updateManyData,
   updateQtyData,
+  deleteField,
 };

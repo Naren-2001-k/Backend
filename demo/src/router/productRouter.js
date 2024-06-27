@@ -13,5 +13,7 @@ router.route("/sort").get(productController.sortData);
 router.route("/update/product/all").put(productController.updateManyData);
 // update many
 router.route("/update/product/qty").put(productController.updateQtyData);
+// delete field
+router.route("/delete/field").delete(productController.deleteField);
 
 module.exports = router;

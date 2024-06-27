@@ -18,6 +18,9 @@ const productSchema = new mongoose.Schema({
   qty: {
     type: Number,
   },
+  minimumqty: {
+    type: Number,
+  },
 });
 
 const productModel = mongoose.model("product", productSchema);
