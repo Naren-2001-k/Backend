@@ -1,7 +1,7 @@
-const jwt=require("jsonwebtoken")
-const crypto=require("crypto")
 const userService = require("../services/userService");
 const usermodel = require("../models/registerModel");
+const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
 const createUserDetails = async (req, res) => {
   const userData = await userService.createUserDetails(req.body);
   res.send(userData);
@@ -26,15 +26,16 @@ const login = async (req, res) => {
   const user = await usermodel.findOne({ email, password });
   //   console.log(user);
   if (user) {
-    const payload={
-      email:user.email,
-      password:user.password
-    }
-    const secretKey=crypto.randomBytes(32).toString('hex')
-    const token=jwt.sign(payload,secretKey,{expiresIn:"24hrs"})
-    res.status(200).send({ 
-      token:token,
-      message: "Authentication Successfull", user });
+    const payload = {
+      email: user.email,
+      password: user.password,
+    };
+    const secretKey = crypto.randomBytes(32).toString("hex");
+    const jwt_Token = jwt.sign(payload, secretKey, { expiresIn: "24hrs" });
+    res.status(200).send({
+      token: jwt_Token,
+      message: "Authentication Successfull",
+    });
   } else {
     res.status(401).send({ message: "Authentication failed" });
   }
